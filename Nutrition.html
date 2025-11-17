@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Meta and Stylesheets are the same as before -->
+   <!-- Basic -->
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <!-- Mobile Metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <!-- Site Metas -->
+   <meta name="keywords" content="" />
+   <meta name="description" content="" />
+   <meta name="author" content="" />
+ 
+   <title>Neogym</title>
+ 
+   <!-- slider stylesheet -->
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+ 
+   <!-- bootstrap core css -->
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+ 
+   <!-- fonts style -->
+   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+   <!-- Custom styles for this template -->
+   <link href="css/style.css" rel="stylesheet" />
+   <!-- responsive style -->
+   <link href="css/responsive.css" rel="stylesheet" />
+  <!-- Add this custom style for the buy button -->
+  <style>
+    .us_section .container {
+      padding: 0 15px;
+    }
+
+    .us_container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .us_container .box {
+      flex: 1 1 calc(25% - 20px);
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .box h5 {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .buy-btn {
+      padding: 10px 20px;
+      margin: 10px 0;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .buy-btn:hover {
+      background-color: #2ecc71;
+    }
+
+    .cart-icon {
+      width: 30px;
+      height: auto;
+      cursor: pointer;
+      margin-left: 15px;
+      color: white;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 5px;
+      font-size: 12px;
+    }
+
+    .cart-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0); /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      padding-top: 60px; /* Location of the box */
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- Header section stays the same -->
+<!-- header section starts -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <span>Univarsal Fitness club</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="customer.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="why.html"> Why us </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="trainer.html"> trainers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="contact.html"> Contact Us</a>
+                </li>
+              </ul>
+              <!-- Cart Icon with Image -->
+              <div class="cart-container">
+                <img src="images/grocery-store.png" alt="Cart" class="cart-icon" onclick="showCart()">
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <section class="us_section layout_padding">
+      <div class="container">
+        <div class="heading_container">
+          <h2>NUTRITION</h2>
+        </div>
+        <div class="us_container">
+          <div class="box">
+            <h5><b>ISOLATE</b></h5>
+            <img src="images/isolate.jpeg" alt="Isolate">
+            <h5>rs 100</h5>
+            <button class="buy-btn" onclick="buyNow('Isolate')">Buy</button>
+            
+          </div>
+          <div class="box">
+            <h5><b>MB</b></h5>
+            <img src="images/MB.jpeg" alt="MB">
+            <h5>rs 100</h5>
+            <button class="buy-btn" onclick="buyNow('MB')">Buy</button>
+            
+          </div>
+          <div class="box">
+            <h5><b>WHEY</b></h5>
+            <img src="images/whey.jpeg" alt="Whey">
+            <h5>rs 100</h5>
+            <button class="buy-btn" onclick="buyNow('Whey')">Buy</button>
+            
+          </div>
+          <div class="box">
+            <h5><b>MUSCLEMILK</b></h5>
+            <img src="images/musclemilk.jpeg" alt="Muscle Milk">
+            <h5>rs 100</h5>
+            <button class="buy-btn" onclick="buyNow('Muscle Milk')">Buy</button>
+           
+          </div>
+          <div class="box">
+            <h5><b>PREMIER PROTEIN</b></h5>
+            <img src="images/premier.png" alt="Premier Protein">
+            <h5>rs 100</h5>
+            <button class="buy-btn" onclick="buyNow('Premier Protein')">Buy</button>
+            
+          </div>
+          <div class="box">
+            <h5><b>INTENSE</b></h5>
+            <img src="images/intense.png" alt="Intense">
+            <h5>rs 100</h5>
+            <button class="buy-btn" onclick="buyNow('Intense')">Buy</button>
+           
+          </div>
+          <div class="box">
+            <h5><b>FITNESS ADDICT</b></h5>
+            <img src="images/fitness.png" alt="Fitness Addict">
+            <h5>rs 100</h5>
+            <button class="buy-btn" onclick="buyNow('Fitness Addict')">Buy</button>
+           
+          </div>
+
+          <div class="box">
+            <h5><b>OZIVA PROTEIN</b></h5>
+            <img src="images/OZIVA.png" alt="Oziva Protein">
+            <h5>rs 100</h5>
+            <button class="buy-btn" onclick="buyNow('Oziva Protein')">Buy</button>
+           
+          </div>
+          <div class="box">
+            <h5><b>PLANT PROTEIN</b></h5>
+            <img src="images/plant protein.png" alt="Plant Protein">
+            <h5>rs 100</h5>
+            <button class="buy-btn" onclick="buyNow('Plant Protein')">Buy</button>
+           
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Cart Modal -->
+<div id="cartModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeCart()">&times;</span>
+    <h2>Shopping Cart</h2>
+    <ul id="cart-items"></ul>
+    <p id="total-amount">Total Amount: Rs. 0</p>
+    <button class="buy-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+  </div>
+</div>
+
+  <!-- Add JavaScript to handle the Buy button functionality -->
+  
+
+  <script>
+    let cart = []; // Initialize an empty cart array
+    let totalAmount = 0; // Initialize the total amount
+
+    function buyNow(product) {
+        const box = event.target.parentElement;
+        const priceElement = box.querySelector('h5:nth-of-type(2)');
+        const priceText = priceElement.innerText;
+        const price = parseFloat(priceText.replace('rs', '').trim());
+
+        if (!isNaN(price)) {
+            const existingProduct = cart.find(item => item.product === product);
+
+            if (existingProduct) {
+                // If the product is already in the cart, just increase its quantity
+                existingProduct.quantity += 1;
+                totalAmount += price;
+            } else {
+                // If the product is not in the cart, add it with quantity 1
+                cart.push({ product, price, quantity: 1 });
+                totalAmount += price;
+            }
+
+            alert('Added ' + product + ' to cart.');
+            updateCartCount();
+            updateTotalAmount();
+        } else {
+            alert('Error fetching price for ' + product);
+        }
+    }
+
+    function updateCartCount() {
+        const cartCountElement = document.getElementById('cart-count');
+        const totalItems = cart.reduce((count, item) => count + item.quantity, 0); // Sum of all item quantities
+        cartCountElement.innerText = totalItems;
+        updateCartItems();
+    }
+
+    function showCart() {
+        document.getElementById('cartModal').style.display = 'block';
+    }
+
+    function closeCart() {
+        document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function updateCartItems() {
+        const cartItemsElement = document.getElementById('cart-items');
+        cartItemsElement.innerHTML = ''; // Clear the list
+
+        cart.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.product} (x${item.quantity}) - Rs. ${item.price * item.quantity}`;
+            li.style.display = 'flex';
+            li.style.justifyContent = 'space-between';
+
+            const buttonContainer = document.createElement('div');
+            buttonContainer.style.display = 'inline-block';
+
+            // Create a remove button (using `-`)
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = '-';
+            removeBtn.className = 'remove-btn';
+            removeBtn.style.fontSize = '20px';
+            removeBtn.style.marginRight = '10px';
+            removeBtn.onclick = function () {
+                removeFromCart(item.product);
+            };
+
+            // Create an add more button (using `+`)
+            const addMoreBtn = document.createElement('button');
+            addMoreBtn.textContent = '+';
+            addMoreBtn.className = 'add-more-btn';
+            addMoreBtn.style.fontSize = '20px';
+            addMoreBtn.onclick = function () {
+                incrementQuantity(item.product); // Instead of adding to the cart, increment the quantity
+            };
+
+            buttonContainer.appendChild(removeBtn);
+            buttonContainer.appendChild(addMoreBtn);
+            li.appendChild(buttonContainer);
+            cartItemsElement.appendChild(li);
+        });
+    }
+
+    function incrementQuantity(product) {
+        const existingProduct = cart.find(item => item.product === product);
+        if (existingProduct) {
+            existingProduct.quantity += 1; // Increase quantity
+            totalAmount += existingProduct.price; // Add price to the total amount
+            updateCartCount();
+            updateTotalAmount();
+        }
+    }
+
+    function removeFromCart(product) {
+        const existingProduct = cart.find(item => item.product === product);
+        if (existingProduct) {
+            if (existingProduct.quantity > 1) {
+                existingProduct.quantity -= 1; // Reduce quantity
+                totalAmount -= existingProduct.price;
+            } else {
+                totalAmount -= existingProduct.price;
+                const index = cart.findIndex(p => p.product === product);
+                if (index > -1) {
+                    cart.splice(index, 1); // Remove item if quantity reaches 0
+                }
+            }
+        }
+        updateCartCount();
+        updateTotalAmount();
+        alert('Removed ' + product + ' from cart.');
+    }
+
+    function updateTotalAmount() {
+        const totalAmountElement = document.getElementById('total-amount');
+        totalAmountElement.innerText = 'Total Amount: Rs. ' + totalAmount.toFixed(2);
+    }
+
+    function proceedToCheckout() {
+    if (cart.length > 0) {
+        // Save the cart data and totalAmount in localStorage for the payment page
+        localStorage.setItem('cart', JSON.stringify(cart));
+        localStorage.setItem('totalAmount', totalAmount.toFixed(2));
+
+        // Redirect to the payment page
+        window.location.href = 'payment.html';
+    } else {
+        alert('Your cart is empty!');
+    }
+}
+
+    window.onclick = function (event) {
+        if (event.target == document.getElementById('cartModal')) {
+            closeCart();
+        }
+    }
+</script>
+
+
+</body>
+
+</html>

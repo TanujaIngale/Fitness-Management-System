@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Membership Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-image: url('images/rope.png');
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: rgba(173, 208, 213, 0.908);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"], button {
+            margin-top: 20px;
+            padding: 10px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        button#clearBtn {
+            background-color: #dc3545;
+        }
+        button#clearBtn:hover {
+            background-color: #c82333;
+        }
+        #scanner {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        #scanner img {
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Gym Membership Form</h2>
+        <form action="submit_form.php" method="POST">
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="first_name" required>
+
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="last_name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="Batch">Select Batch:</label>
+            <select id="Batch" name="select_batch" required>
+                <option value="mrg">Morning</option>
+                <option value="Evg">Evening</option>
+            </select>
+
+            <label for="membership">Membership Plan:</label>
+            <select id="membership" name="membership_plan" required>
+                <option value="monthly">Monthly - rs550</option>
+                <option value="quarterly">Quarterly - rs3500</option>
+                <option value="yearly">Yearly - rs5000</option>
+            </select>
+
+            <label for="payment">Select payment method:</label>
+            <select id="payment" name="payment_method" required>
+                <option value="cash">Cash</option>
+                <option value="online">Online</option>
+            </select>
+
+            <!-- Hidden field for payment amount -->
+            <input type="hidden" id="paymentAmount" name="payment_amount">
+
+            <!-- QR Scanner section -->
+            <div id="scanner">
+                <p>Please scan the QR code to make the payment:</p>
+                <img src="images/qr-code.jpg" alt="QR Code">
+            </div>
+
+            <!-- Submit and Clear Buttons -->
+            <input type="submit" value="Submit">
+            <button type="button" id="clearBtn">Clear</button>
+        </form>
+    </div>
+
+    <script>
+        // Get elements
+        const paymentSelect = document.getElementById('payment');
+        const scannerDiv = document.getElementById('scanner');
+        const membershipSelect = document.getElementById('membership');
+        const paymentAmountField = document.getElementById('paymentAmount');
+        const clearBtn = document.getElementById('clearBtn');
+
+        // Show/hide scanner when payment method changes
+        paymentSelect.addEventListener('change', function() {
+            if (paymentSelect.value === 'online') {
+                scannerDiv.style.display = 'block';
+            } else {
+                scannerDiv.style.display = 'none';
+            }
+        });
+
+        // Update payment amount based on membership plan
+        membershipSelect.addEventListener('change', function() {
+            let selectedPlan = membershipSelect.value;
+            let paymentAmount;
+
+            switch (selectedPlan) {
+                case 'monthly': paymentAmount = 550; break;
+                case 'quarterly': paymentAmount = 3500; break;
+                case 'yearly': paymentAmount = 5000; break;
+                default: paymentAmount = 0;
+            }
+
+            paymentAmountField.value = paymentAmount;
+        });
+
+        // Clear form fields when "Clear" button is clicked
+        clearBtn.addEventListener('click', function() {
+            document.querySelector('form').reset(); // Reset all fields
+            scannerDiv.style.display = 'none'; // Hide QR scanner
+            paymentAmountField.value = ''; // Clear hidden payment field
+        });
+
+        // Initialize default membership plan
+        window.onload = function() {
+            membershipSelect.dispatchEvent(new Event('change'));
+        };
+    </script>
+</body>
+</html>

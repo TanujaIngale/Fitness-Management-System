@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Information & Payment</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Customer Information</h2>
+        <form id="customerInfoForm" action="payment_process.php" method="POST">
+            <div class="form-group">
+                <label for="customerName">Full Name</label>
+                <input type="text" class="form-control" id="customerName" name="customerName" required>
+            </div>
+            <div class="form-group">
+                <label for="customerEmail">Email</label>
+                <input type="email" class="form-control" id="customerEmail" name="customerEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="customerAddress">Shipping Address</label>
+                <textarea class="form-control" id="customerAddress" name="customerAddress" rows="3" required></textarea>
+            </div>
+
+            <h3>Payment Information</h3>
+
+            <div class="form-group">
+                <label>Select Payment Method</label><br>
+                <input type="radio" id="onlinePayment" name="paymentMethod" value="online" required>
+                <label for="onlinePayment">Online Payment</label><br>
+                <input type="radio" id="codPayment" name="paymentMethod" value="cod" required>
+                <label for="codPayment">Cash on Delivery (COD)</label>
+            </div>
+
+            <div id="onlinePaymentDetails" style="display: none;">
+                <div class="form-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" class="form-control" id="cardNumber" placeholder="1234-5678-9876-5432">
+                </div>
+                <div class="form-group">
+                    <label for="expiryDate">Expiry Date</label>
+                    <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" class="form-control" id="cvv" placeholder="123">
+                </div>
+            </div>
+
+            <h4>Order Summary</h4>
+            <ul id="cart-items"></ul>
+            <p id="total-amount"></p>
+            <input type="hidden" id="totalAmountInput" name="totalAmount">
+
+            <button type="submit" class="btn btn-success">Complete Purchase</button>
+        </form>
+    </div>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart'));
+        const totalAmount = localStorage.getItem('totalAmount');
+        const cartItemsElement = document.getElementById('cart-items');
+        const totalAmountElement = document.getElementById('total-amount');
+        document.getElementById('totalAmountInput').value = totalAmount;
+
+        if (cart && cart.length > 0) {
+            cart.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.innerText = `${item.product} - Rs. ${item.price} x ${item.quantity} = Rs. ${item.price * item.quantity}`;
+                cartItemsElement.appendChild(listItem);
+            });
+        } else {
+            cartItemsElement.innerText = 'Your cart is empty.';
+        }
+
+        totalAmountElement.innerText = 'Total Amount: Rs. ' + totalAmount;
+
+        document.getElementById('onlinePayment').addEventListener('change', function() {
+            document.getElementById('onlinePaymentDetails').style.display = 'block';
+        });
+
+        document.getElementById('codPayment').addEventListener('change', function() {
+            document.getElementById('onlinePaymentDetails').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
